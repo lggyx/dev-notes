@@ -10,4 +10,8 @@ import java.util.List;
 public interface DeptMapper {
 //    @Select("select * from dept")
     List<Dept> list();
+
+    int delete(Integer id);
+
+    int add(Dept dept);
 }

@@ -8,4 +8,8 @@ import java.util.List;
 @Service
 public interface DeptService {
     List<Dept> list();
+
+    boolean delete(Integer id);
+
+    boolean add(Dept dept);
 }
