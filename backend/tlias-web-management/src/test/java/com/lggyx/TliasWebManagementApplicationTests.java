@@ -47,4 +47,31 @@ class TliasWebManagementApplicationTests {
         rs = deptController.list();
         System.out.println(rs);
     }
+    @Test
+    void deptGet(){
+        //获取部门列表
+        Result rs = deptController.list();
+        System.out.println(rs);
+        //获取部门
+        rs = deptController.get(1);
+        System.out.println(rs);
+    }
+    @Test
+    void deptUpdate(){
+        //获取部门列表
+        Result rs = deptController.list();
+        System.out.println(rs);
+        //修改部门
+        rs = deptController.update(new Dept(){
+            {
+                setId(1);
+                setName("测试部");
+            }
+        });
+        System.out.println(rs);
+        //获取部门列表
+        rs = deptController.list();
+        System.out.println(rs);
+    }
+
 }

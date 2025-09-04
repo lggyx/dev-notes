@@ -12,4 +12,8 @@ public interface DeptService {
     boolean delete(Integer id);
 
     boolean add(Dept dept);
+
+    Dept get(Integer id);
+
+    boolean update(Dept dept);
 }

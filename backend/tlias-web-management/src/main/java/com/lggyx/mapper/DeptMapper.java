@@ -14,4 +14,8 @@ public interface DeptMapper {
     int delete(Integer id);
 
     int add(Dept dept);
+
+    Dept get(Integer id);
+
+    int update(Dept dept);
 }

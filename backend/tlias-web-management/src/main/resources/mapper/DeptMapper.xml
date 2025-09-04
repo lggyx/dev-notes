@@ -6,10 +6,16 @@
     <insert id="add">
         insert into dept(name,create_time,update_time) values(#{name},#{createTime},#{updateTime})
     </insert>
+    <update id="update">
+        update dept set name=#{name},update_time=#{updateTime} where id=#{id}
+    </update>
     <delete id="delete">
         delete from dept where id=#{id}
     </delete>
     <select id="list" resultType="com.lggyx.pojo.Dept">
         select * from dept
+    </select>
+    <select id="get" resultType="com.lggyx.pojo.Dept">
+        select *, date_format(create_time,'%Y-%m-%d %H:%i:%s') as createTime,date_format(update_time,'%Y-%m-%d %H:%i:%s') as updateTime from dept where id=#{id}
     </select>
 </mapper>
