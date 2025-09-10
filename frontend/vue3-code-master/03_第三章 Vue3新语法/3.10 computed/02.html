@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>watch</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>count: {{countObj.count}}</p>
+      <p>person: {{person.name}}-{{person.addr.city}}</p>
+
+      <button @click="update">更新</button>
+    </div>
+    <script>
+      const { createApp, ref, reactive, watch } = Vue
+
+      createApp({
+        setup() {
+          const countObj = ref({
+            count: 0,
+          })
+          const person = reactive({
+            name: '张三',
+            addr: {
+              city: '北京',
+            },
+          })
+
+          // 浅监视ref对象
+          // watch(countObj, (newVal, oldVal) => {
+          //   console.log('countObj 浅监视', newVal, oldVal)
+          // })
+
+          // // 深度监视ref对象
+          // watch(
+          //   countObj,
+          //   (newVal, oldVal) => {
+          //     console.log('countObj 深度监视', newVal, oldVal)
+          //   },
+          //   { deep: true }
+          // )
+
+          // const update = () => {
+          //   // 对ref对象数据进行浅更新
+          //   countObj.value = { count: 2 }
+          // }
+
+          // const update = () => {
+          //   // 对ref对象数据进行深更新
+          //   countObj.value.count = 3
+          // }
+          // 监视 reactive对象  默认就是深度的
+          // watch(person, (newVal, oldVal) => {
+          //   console.log('person change', newVal, oldVal)
+          // })
+
+          // const update = () => {
+          //   // 浅更新
+          //   person.name += '--'
+          //   // 深度更新
+          //   person.addr.city += '=='
+          // }
+          // 错误写法
+          // watch(person.addr, (newVal, oldVal) => {
+          //   console.log('person.addr change', newVal, oldVal)
+          // })
+
+          // 正确写法
+          // watch(
+          //   () => person.name,
+          //   (newVal, oldVal) => {
+          //     console.log('person.addr change', newVal, oldVal)
+          //   }
+          // )
+          // const update = () => {
+          //   // 浅更新
+          //   person.name += '--'
+          // }
+
+          // 监视ref对象和reactive对象中的name属性
+          // watch([countObj, () => person.name], (newVals, oldVals) => {
+          //   console.log('countObj或person.name变化了', newVals, oldVals)
+          // })
+
+          // const update = () => {
+          //   countObj.value = { count: 2 }
+          // }
+
+          // const update = () => {
+          //   person.name += '--'
+          // }
+
+          watch(
+            countObj,
+            (newVal, oldVal) => {
+              console.log('立即执行的监视', newVal, oldVal)
+              // 可以执行异步操作
+              setTimeout(() => {
+                alert('2秒后的提示')
+              }, 2000)
+            },
+            { immediate: true }
+          )
+
+          const update = () => {
+            countObj.value = { count: 2 }
+          }
+
+          return {
+            countObj,
+            person,
+            update,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ajax-web-server">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/backend/java-web/ajax地址访问不了-解决方案/方案二 (自己启动-准备好的服务)/ajax-web-server.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

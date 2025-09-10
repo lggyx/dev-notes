@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>人员列表</h2>
+      <input type="text" placeholder="请输入姓名" v-model="keyword" />
+      <ul>
+        <li v-for="(p,index) of filterPerons" :key="p.id">
+          {{p.name}}-{{p.age}}-{{p.sex}}
+        </li>
+      </ul>
+      <button @click="sortType = 2">年龄升序</button> --
+      <button @click="sortType = 1">年龄降序</button> --
+      <button @click="sortType = 0">原顺序</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            persons: [
+              // 所有人员的列表
+              { id: '001', name: '廖景山', age: 21, sex: '男' },
+              { id: '002', name: '熊小巧', age: 19, sex: '女' },
+              { id: '003', name: '吴天山', age: 20, sex: '男' },
+              { id: '004', name: '谢思萌', age: 22, sex: '女' }
+            ],
+            keyword: '', // 输入的用户名
+            sortType: 0, //0原顺序 1降序 2升序
+          }
+        },
+
+        computed: {
+          // 过滤并排序后的人员列表
+          filterPerons() {
+            // 取出依赖数据
+            const { persons, keyword, sortType } = this
+
+            // 对总数组进行过滤产生过滤后的数组
+            const arr = persons.filter((p) => {
+              return p.name.indexOf(keyword) !== -1
+            })
+            // 只有当sortType不为0时, 才进行排序
+            if (sortType != 0) {
+              arr.sort((p1, p2) => {
+                if (sortType === 1) {
+                  // 降序
+                  return p2.age - p1.age
+                } else {
+                  // 升序
+                  return p1.age - p2.age
+                }
+              })
+            }
+            return arr
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

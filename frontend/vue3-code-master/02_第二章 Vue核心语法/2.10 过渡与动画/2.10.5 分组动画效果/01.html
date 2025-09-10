@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分组动画效果</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <button class="btn btn-pirmary" @click="addItem">Add Item</button>
+      <!-- 指定ul作为容器元素来渲染 -->
+      <!-- transition-group中拥有与transition相同的属性 -->
+      <transition-group
+        tag="ul"
+        enter-active-class="animate__animated animate__bounceInRight"
+        leave-active-class="animate__animated animate__bounceOutRight"
+      >
+        <!-- 每个子元素都必须有唯一值key属性 -->
+        <li
+          v-for="(number,index) in numbers"
+          @click="removeItem(index)"
+          :key="number"
+        >
+          {{number}}
+        </li>
+      </transition-group>
+    </div>
+
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            numbers: [1, 2, 3, 4, 5],
+          }
+        },
+        methods: {
+          addItem() {
+            // 列表随机位置添加一个元素
+            const pos = Math.floor(Math.random() * this.numbers.length)
+            this.numbers.splice(pos, 0, this.numbers.length + 1)
+          },
+          removeItem(index) {
+            // 移除指定位置的元素
+            this.numbers.splice(index, 1)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

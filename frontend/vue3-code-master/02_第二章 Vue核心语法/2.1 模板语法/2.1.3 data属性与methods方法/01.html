@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>data属性与methods方法</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>count: {{count}}</h2>
+      <button @click="updateCount">更新</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      const app = createApp({
+        // data函数返回data对象， data对象中的所有属性在代理对象上都会有对应的名称的属性
+        data() {
+          console.log(this)
+          return {
+            count: 0,
+          }
+        },
+
+        // methods中的所有方法，都会成为代理对象的方法
+        methods: {
+          updateCount() {
+            this.count += 1
+          },
+        },
+      })
+      // console.log(app)
+
+      const vm = app.mount('#app')
+      // 通过代理对象vm读取定义在data对象中的count属性
+      console.log(vm.count)
+
+      // 2秒后通过代理对象vm直接更新data中的count属性，界面会自动更新
+      setTimeout(() => {
+        vm.count += 2
+      }, 2000)
+
+      // 4秒后通过代理对象vm调用methods中定义的方法来更新count，界面会自动更新
+      setTimeout(() => {
+        vm.updateCount()
+      }, 4000)
+    </script>
+  </body>
+</html>

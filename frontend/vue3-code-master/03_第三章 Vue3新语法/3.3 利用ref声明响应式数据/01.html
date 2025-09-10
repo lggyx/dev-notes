@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用ref声明响应式数据</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 模板中不用.value, 内部在模板编译时会自动添加 -->
+      <p>count:{{count}}</p>
+      <button @click="increaseCount">增加count</button>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue
+
+      createApp({
+        setup() {
+          // 通过调用ref产生ref对象count, 并指定内部保存的数据初始值为0
+          const count = ref(0)
+          // 读取ref对象中的value数据
+          console.log(count.value) // 0
+          // 定义更新ref响应式数据的函数
+          const increaseCount = () => {
+            // 先读取value属性, 加1后再更新到value属性上
+            count.value = count.value + 1
+          }
+          // 返回包含ref对象和更新函数的对象
+          return {
+            count,
+            increaseCount,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

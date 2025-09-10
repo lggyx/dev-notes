@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组合式API的了解-组合API</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>count:{{ count }}</p>
+      <p>double:{{ double }}</p>
+      <button @click="increase">increase</button>
+    </div>
+    <script>
+      const { createApp, ref, computed, watch } = Vue
+      createApp({
+        setup(props, context) {
+          // 初始化ref响应式数据
+          const count = ref(0)
+          // 设置methods方法
+          const increase = () => {
+            count.value++
+          }
+          // 设置计算属性
+          const double = computed(() => count.value * 2)
+          // 设置watch监听，监控count值变化
+          watch(count, (newVal, oldVal) => {
+            console.log(newVal, oldVal)
+          })
+          // 返回响应式数据以及方法与属性计算操作
+          return {
+            count,
+            increase,
+            double,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

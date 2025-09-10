@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>比较v-if和v-show</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-if="isShow">尚硅谷IT教育1</h1>
+      <h2 v-show="isShow">尚硅谷IT教育2</h2>
+      <button @click="isShow=!isShow">切换标识</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            isShow: false,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

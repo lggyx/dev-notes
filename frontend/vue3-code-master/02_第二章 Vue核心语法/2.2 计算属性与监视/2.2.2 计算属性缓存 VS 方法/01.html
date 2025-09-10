@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性缓存 VS 方法</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 读取data数据显示 -->
+      <h2>测评得分: {{ score }}</h2>
+
+      <!-- 读取计算属性数据显示 3处 -->
+      <h3>测评结果(computed实现): {{ resultText }}</h3>
+      <h3>测评结果(computed实现): {{ resultText }}</h3>
+      <h3>测评结果(computed实现): {{ resultText }}</h3>
+
+      <!-- 调用method方法显示  3处 -->
+      <h4>测评结果(method实现): {{ getResultText() }}</h4>
+      <h4>测评结果(method实现): {{ getResultText() }}</h4>
+      <h4>测评结果(method实现): {{ getResultText() }}</h4>
+
+      <button @click="reExam">学习一段时间后重新测评</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            score: 59,
+          }
+        },
+
+        computed: {
+          resultText() {
+            console.log('computed resultText()')
+            const result =
+              this.score < 60
+                ? '入学测试未通过, 暂时不可以来尚硅谷学习'
+                : '入学测试通过，欢迎来尚硅谷学习'
+            return result
+          },
+        },
+
+        methods: {
+          getResultText() {
+            console.log('method getResultText()')
+            const result =
+              this.score < 60
+                ? '入学测试未通过, 暂时不可以来尚硅谷学习'
+                : '入学测试通过，欢迎来尚硅谷学习'
+            return result
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

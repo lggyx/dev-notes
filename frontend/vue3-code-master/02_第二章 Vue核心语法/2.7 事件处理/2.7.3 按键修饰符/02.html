@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>按键修饰符</title>
+  </head>
+  <body>
+    <!--  点击enter键抬起时触发 -->
+    <input type="text" @keyup.enter="hint" />
+    <!--  点击向上方向键抬起时触发 -->
+    <input type="text" @keyup.arrow-up="hint" />
+    <!--  点击A键抬起时触发 -->
+    <input type="text" @keyup.a="hint" />
+
+    <!--  点击向上方向键抬起时触发 -->
+    <!-- <input type="text" @keyup.up="hint"> -->
+
+    <!-- alt键与enter键的组合 -->
+    <!-- <input @keyup.alt.enter="hint" /> -->
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        methods: {
+          hint(event) {
+            alert(event.key)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

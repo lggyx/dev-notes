@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表的动态渲染</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>测试遍历数组<人员列表>（用得很多）</h2>
+      <ul>
+        <li v-for="(p,index) in persons">{{index}}--{{p.name}}--{{p.age}}</li>
+      </ul>
+
+      <h2>测试遍历对象<汽车信息>（用得少）</h2>
+      <ul>
+        <li v-for="(value,name) in car">{{name}}--{{value}}</li>
+      </ul>
+
+      <h2>测试遍历指定次数（用得少）</h2>
+      <ul>
+        <li v-for="value in num">{{value}}</li>
+      </ul>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            persons: [
+              { id: '001', name: '张三', age: 22 },
+              { id: '002', name: '李四', age: 24 },
+              { id: '003', name: '王五', age: 23 },
+            ],
+            car: {
+              name: '奥迪A8',
+              price: '70万',
+              color: '黑色',
+            },
+            num: 5,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

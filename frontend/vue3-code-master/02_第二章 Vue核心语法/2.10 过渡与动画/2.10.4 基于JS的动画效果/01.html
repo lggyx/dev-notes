@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基于JS的动画效果</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <button @click="show = !show">切换动画</button>
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @before-leave="beforeLeave"
+        @leave="leave"
+      >
+        <div
+          style="width: 100px; height: 100px; background-color: green"
+          v-if="show"
+        ></div>
+      </transition>
+    </div>
+
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            show: false,
+            elementWidth: 100,
+          }
+        },
+        methods: {
+          beforeEnter: function (el) {
+            // el是动画元素目标
+            this.elementWidth = 100
+            // 初始元素宽度
+            el.style.width = this.elementWidth + 'px'
+          },
+          enter: function (el, done) {
+            // 通过定时器，每隔10毫秒，将元素宽度增加10px
+            let round = 1
+            const interval = setInterval(() => {
+              el.style.width = this.elementWidth + round * 10 + 'px'
+              round++
+              // 当达到指定条件时，停止定时器，并终止动画
+              if (round > 20) {
+                clearInterval(interval)
+                done() // 动画完成
+              }
+            }, 20)
+          },
+          beforeLeave: function (el) {
+            this.elementWidth = 300
+            el.style.width = this.elementWidth + 'px'
+          },
+          leave: function (el, done) {
+            // 通过定时器，每隔10毫秒，将元素宽度减少10px
+            let round = 1
+            const interval = setInterval(() => {
+              el.style.width = this.elementWidth - round * 10 + 'px'
+              round++
+              // 当达到指定条件时，停止定时器，并终止动画
+              if (round > 20) {
+                clearInterval(interval)
+                done() // 动画完成
+              }
+            }, 20)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

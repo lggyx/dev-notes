@@ -600,3 +600,35 @@ TCP（传输控制协议）是一种可靠的传输层协议，用于在互联�
 1. Date和Calendar
 2. SimpleDateFormat
 
+### wait/notify/notifyAll方法应用
+
+**必须用在同步方法或同步代码块内部，由对象锁调用**
+
+### sleep和wait方法的区别
+
+sleep和wait在编程中用于控制线程执行的两种常见方式，他们的主要区别如下：
+
+1. 功能不同
+2. 调用方式不同
+3. 锁的释放不同
+4. 唤醒的方式不同
+
+### 描述Java线程池中的常见参数
+
+```asciiarmor
+corePoolSize(核心池大小)
+maximumPoolSize(最大池大小)
+keepAliveTime(线程空闲时间)
+unit(时间单位)
+workQueue(工作队列)
+threadFactory(线程工厂)
+handler(拒绝策略)
+```
+
+### 线程池的拒绝策略有哪些？
+
+1. AbortPolicy
+2. DiscardPolicy
+3. DiscardOldestPolicy
+4. CallerRunsPolicy
+

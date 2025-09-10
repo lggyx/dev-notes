@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+    <title>setup组合API入口函数</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>msg: {{msg}}</p>
+      <button @click="handleClick">测试</button>
+    </div>
+
+    <script>
+      'use strict'
+
+      const { createApp } = Vue
+
+      createApp({
+        setup(props, context) {
+          console.log(this) // this是undefined
+
+          let msg = 'Hello atguigu!'
+          function handleClick() {
+            alert('响应点击')
+            msg += '--'
+          }
+          // 返回对象中的属性和函数, 模板中可以直接使用
+          return {
+            msg,
+            handleClick,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

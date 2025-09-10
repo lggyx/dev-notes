@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绑定事件监听</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>num: {{num}}</h2>
+      <button>测试event1(点击提示按钮的文本)</button><br /><br />
+      <button>测试event2(点击提示指定的特定数据)</button><br /><br />
+      <button>测试event4(点击num增加3)</button><br /><br />
+      <button>测试event3(点击提示按钮的文本和指定的特定数据)</button
+      ><br /><br />
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            num: 2,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

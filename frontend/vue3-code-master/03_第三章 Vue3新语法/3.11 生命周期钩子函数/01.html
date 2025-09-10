@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生命周期钩子函数</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p ref="mRef">{{ message }}</p>
+      <button @click="message = '尚硅谷拥有最好的互联网技术培训'">
+        更新内容
+      </button>
+    </div>
+
+    <script>
+      const {
+        createApp,
+        ref,
+        onBeforeMount,
+        onMounted,
+        onBeforeUpdate,
+        onUpdated,
+        onBeforeUnmount,
+        onUnmounted,
+      } = Vue
+
+      const app = createApp({
+        setup(props, context) {
+          // 声明一个ref元素对象
+          const mRef = ref(null)
+          // 声明响应式数据message
+          const message = ref('欢迎来到尚硅谷')
+          // onBeforeMount没有完成挂载，有message却没有ref元素对象
+          onBeforeMount(() => {
+            console.log('onBeforeMount', message, mRef.value)
+          })
+          // onMounted已经完成挂载，message与ref元素都存在
+          onMounted(() => {
+            console.log('onMounted', message, mRef.value)
+          })
+          // 更新之前的界面
+          onBeforeUpdate(() => {
+            console.log('onBeforeUpdate')
+            debugger
+          })
+          // 更新之后的界面
+          onUpdated(() => {
+            console.log('onUpdated')
+          })
+          // 实例完全卸载前，仍旧有元素对象
+          onBeforeUnmount(() => {
+            console.log('onBeforeUnmount', mRef.value)
+            debugger
+          })
+          // 实例完全卸载，不存在元素对象
+          onUnmounted(() => {
+            console.log('onUnmounted', mRef.value)
+          })
+
+          return {
+            mRef,
+            message,
+          }
+        },
+      })
+
+      app.mount('#app')
+      setTimeout(() => {
+        app.unmount()
+      }, 5000)
+    </script>
+  </body>
+</html>

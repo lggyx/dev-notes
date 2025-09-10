@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基于 CSS 的逐帧效果</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+    <style>
+      /* 开始与离开动画都是指定逐帧动画名称 */
+      .slide-enter-active {
+        animation: slide-in 0.5s ease;
+      }
+
+      .slide-leave-active {
+        animation: slide-out 0.5s ease;
+      }
+
+      /* 逐帧动画可以使用百分比，如果只是开始与结束可以使用from、to */
+      @keyframes slide-in {
+        0% {
+          transform: translateX(100px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slide-out {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(100px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="show = !show">切换动画</button>
+      <transition name="slide">
+        <div v-if="show">Hello Vue3!</div>
+      </transition>
+    </div>
+
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            show: false,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

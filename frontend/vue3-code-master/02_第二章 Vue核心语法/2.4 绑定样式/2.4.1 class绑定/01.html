@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class绑定</title>
+    <style>
+      .basic {
+        width: 200px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        border: 1px solid black;
+        margin-bottom: 10px;
+      }
+
+      .normal {
+        background-color: skyblue;
+      }
+      .happy {
+        background-color: rgba(255, 255, 0, 0.644);
+      }
+      .sad {
+        background-color: gray;
+      }
+
+      .atguigu1 {
+        background-color: yellowgreen;
+      }
+      .atguigu2 {
+        font-size: 30px;
+      }
+      .atguigu3 {
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>测试class绑定(点击更新)</h2>
+      <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+      <div class="basic" :class="classStr" @click="updateClass1">尚硅谷1</div>
+      <!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用 -->
+      <div class="basic" :class="classObj" @click="updateClass2">尚硅谷2</div>
+
+      <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定、名字也不确定 -->
+      <div class="basic" :class="classArr" @click="updateClass3">尚硅谷3</div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            classStr: 'normal',
+            classObj: {
+              atguigu1: true,
+              atguigu2: false,
+            },
+            classArr: ['atguigu1', 'atguigu2', 'atguigu3'],
+          }
+        },
+
+        methods: {
+          // 更新动态的字符串类型class
+          updateClass1() {
+            const arr = ['happy', 'sad', 'normal']
+            const index = Math.floor(Math.random() * 3)
+            this.classStr = arr[index]
+          },
+
+          // 更新动态的对象类型class
+          updateClass2() {
+            this.classObj.atguigu1 = !this.classObj.atguigu1
+            this.classObj.atguigu2 = !this.classObj.atguigu2
+          },
+
+          // 更新动态的数组类型class
+          updateClass3() {
+            this.classArr.pop()
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表的过滤</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>人员列表</h2>
+      <input type="text" placeholder="请输入姓名" v-model="keyword" />
+      <ul>
+        <li v-for="(p,index) of filterPerons" :key="index">
+          {{p.name}}-{{p.age}}-{{p.sex}}
+        </li>
+      </ul>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            persons: [
+              // 所有人员的列表
+              { id: '001', name: '廖景山', age: 21, sex: '男' },
+              { id: '002', name: '熊小巧', age: 19, sex: '女' },
+              { id: '003', name: '吴天山', age: 20, sex: '男' },
+              { id: '004', name: '谢思萌', age: 22, sex: '女' },
+            ],
+            keyword: '', // 输入的用户名
+          }
+        },
+
+        computed: {
+          filterPerons() {
+            // 过滤后用于显示人员列表的计算属性
+            return this.persons.filter((p) => {
+              return p.name.indexOf(this.keyword) !== -1
+            })
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

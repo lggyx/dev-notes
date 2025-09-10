@@ -1,0 +1,22 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "username": "Tom",
+      "age": 23,
+      "salary": 15000
+    },
+    {
+      "id": 3,
+      "username": "Bob",
+      "age": 22,
+      "salary": 12000
+    },
+    {
+      "username": "AAA",
+      "age": 23,
+      "salary": 15000,
+      "id": 4
+    }
+  ]
+}

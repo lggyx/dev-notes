@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>style绑定</title>
+    <style>
+      .basic {
+        width: 200px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        border: 1px solid black;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>测试style绑定(点击更新)</h2>
+      <div class="basic" :style="styleStr" @click="updateStyle1">尚硅谷4</div>
+      <div class="basic" :style="styleObj" @click="updateStyle2">尚硅谷5</div>
+      <div class="basic" :style="styleArr" @click="updateStyle3">尚硅谷6</div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            styleStr: 'font-size: 30px; color: red',
+            styleObj: {
+              fontSize: '40px',
+              color: 'green',
+            },
+            styleArr: [
+              {
+                fontSize: '40px',
+                color: 'blue',
+              },
+              {
+                backgroundColor: 'gray',
+              },
+            ],
+          }
+        },
+
+        methods: {
+          // 更新动态的字符串类型style
+          updateStyle1() {
+            this.styleStr = 'font-size: 20px; color: blue'
+          },
+          // 更新动态的对象类型style
+          updateStyle2() {
+            this.styleObj.fontSize = '50px'
+            this.styleObj.color = 'blue'
+          },
+          // 更新动态的数组类型style
+          updateStyle3() {
+            this.styleArr[0].color = 'red'
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

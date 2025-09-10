@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "json-server index.js"
+  },
+  "dependencies": {
+    "mockjs": "^1.1.0"
+  }
+}

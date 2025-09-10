@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用reactive声明响应式数据</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li>msg: {{ state.msg }}</li>
+        <li>person: {{ state.person }}</li>
+        <li>courses: {{ state.courses }}</li>
+      </ul>
+      <button @click="updateMsg">更新msg</button>
+      <button @click="updatePerson">更新person</button>
+      <button @click="updateCourses">更新courses</button>
+    </div>
+
+    <script>
+      const { createApp, reactive } = Vue
+
+      createApp({
+        setup(props, context) {
+          // 使用reactive定义包含多个数据的响应式对象
+          const state = reactive({
+            msg: 'Hello Atguigu', // 基本类型
+            person: { name: 'Tom', age: 22 }, // 对象类型
+            courses: ['JS', 'BOM', 'DOM'], // 数组类型
+          })
+
+          // 更新字符串msg的函数
+          const updateMsg = () => {
+            state.msg += '--'
+          }
+          // 更新对象person的函数
+          const updatePerson = () => {
+            state.person = { name: 'Jack', age: 33 }
+          }
+          // 更新数组courses的函数
+          const updateCourses = () => {
+            state.courses = ['JS2', 'BOM2', 'DOM2']
+          }
+
+          return {
+            updateMsg,
+            updatePerson,
+            updateCourses,
+            state,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

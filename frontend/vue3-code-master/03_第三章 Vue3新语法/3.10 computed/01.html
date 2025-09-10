@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>watch</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>count: {{countObj.count}}</p>
+      <p>person: {{person.name}}-{{person.addr.city}}</p>
+
+      <button @click="update">更新</button>
+    </div>
+    <script>
+      const { createApp, ref, reactive, watch } = Vue
+
+      createApp({
+        setup() {
+          const countObj = ref({
+            count: 0,
+          })
+          const person = reactive({
+            name: '张三',
+            addr: {
+              city: '北京',
+            },
+          })
+
+          const update = () => {
+            // 准备更新ref或reactive数据
+          }
+
+          return {
+            countObj,
+            person,
+            update,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>shallowRef与shallowReactive</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>课程信息:</h3>
+      <ul>
+        <li>名称: {{course.title}}</li>
+        <li>天数: {{course.days}}</li>
+      </ul>
+
+      <h3>人员信息:</h3>
+      <ul>
+        <li>姓名: {{person.name}}</li>
+        <li>城市: {{person.addr.city}}</li>
+      </ul>
+
+      <button @click="update1">浅更新ref对象</button> &nbsp;
+      <button @click="update2">浅更新reactive对象</button> &nbsp;
+      <button @click="update3">深更新ref对象</button> &nbsp;
+      <button @click="update4">深更新reactive对象</button>
+    </div>
+
+    <script>
+      const { createApp, shallowRef, shallowReactive } = Vue
+
+      createApp({
+        setup() {
+          // 定义浅ref对象
+          const course = shallowRef({
+            title: '',
+            days: 0,
+          })
+          console.log(course)
+
+          // 定义浅reactive对象
+          const person = shallowReactive({
+            name: '',
+            addr: {
+              city: '',
+            },
+          })
+          console.log(person)
+
+          // 直接更新value属性，界面会更新
+          const update1 = () => {
+            course.value = {
+              // 界面会更新
+              title: 'Vue技术栈',
+              days: 40,
+            }
+          }
+
+          // 更新外层属性，界面会更新
+          const update2 = () => {
+            person.name = '李四'
+            person.addr = {
+              city: '北京',
+            }
+          }
+
+          // 更新value对象内部属性，界面不会更新
+          const update3 = () => {
+            course.value.title = 'React技术栈'
+            course.value.days = 20
+          }
+
+          // 更新深层的属性，界面不会更新
+          const update4 = () => {
+            person.addr.city = '上海'
+          }
+
+          return {
+            course,
+            person,
+            update1,
+            update2,
+            update3,
+            update4,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

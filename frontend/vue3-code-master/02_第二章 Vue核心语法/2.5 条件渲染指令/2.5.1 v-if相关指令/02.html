@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if相关指令</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2 v-if="score>=60" style="color: green">欢迎来尚硅谷学习!</h2>
+      <h3 v-else style="color: red">很遗憾, 你的面试没有通过...</h3>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            score: 55,
+          }
+        },
+        methods: {
+          examAgin() {
+            this.score += 10
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

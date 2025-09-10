@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性基本使用</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 读取data数据显示 -->
+      <h2>测评得分: {{score}}</h2>
+      <!-- 读取计算属性数据显示 -->
+      <h3>测评结果: {{resultText}}</h3>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            score: 59,
+          }
+        },
+
+        // 所有计算属性都定义在computed配置对象中
+        computed: {
+          // 一个函数类型的计算属性，返回计算的结果
+          resultText() {
+            console.log('computed resultText()')
+            // 根据score进行计算，产生模板需要显示的结果
+            const result =
+              this.score < 60
+                ? '入学测试未通过, 暂时不可以来尚硅谷学习'
+                : '入学测试通过，欢迎来尚硅谷学习'
+            // 返回结果数据
+            return result
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

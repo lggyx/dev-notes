@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>相关修饰符</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <form @submit.prevent="confirm">
+        账号1：<input type="text" v-model.lazy="userInfo.account1" />
+        <br /><br />
+        账号2：<input type="text" v-model.trim="userInfo.account2" />
+        <br /><br />
+        账号3：<input type="text" v-model.number="userInfo.account3" />
+        <br /><br />
+        <button>提交</button>
+      </form>
+      <div>预览:{{userInfo}}</div>
+    </div>
+
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            userInfo: {
+              account1: '',
+              account2: '',
+              account3: '',
+            },
+          }
+        },
+
+        methods: {
+          confirm() {
+            alert(`提交注册请求 用户信息: ${JSON.stringify(this.userInfo)}`)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

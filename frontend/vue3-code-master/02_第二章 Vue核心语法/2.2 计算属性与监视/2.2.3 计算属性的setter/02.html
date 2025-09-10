@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性的setter</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>name: {{ person.name }}</h3>
+      <h3>likes: {{ person.likes }}</h3>
+      <button @click="updateP">更新人员信息</button>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            person: {
+              name: 'tom',
+              likes: ['football', 'basketball'],
+            },
+          }
+        },
+
+        watch: {
+          person: {
+            handler(newVal, oldVal) {
+              // 模拟异步将人的信息提交给后台
+              setTimeout(() => {
+                alert('向后台提交人员信息' + JSON.stringify(newVal))
+              }, 1000)
+            },
+            immediate: true, // 标识立即执行: 也就是初始时会执行第一次
+          },
+        },
+
+        methods: {
+          updateP() {
+            // 更新person: 指定一个新的人对象
+            this.person = {
+              name: this.person.name + '--',
+              likes: [...this.person.likes, 'atguigu'],
+            }
+          },
+        },
+      }).mount('#app')
+    </script>
+
+    <style lang="scss" scoped></style>
+  </body>
+</html>

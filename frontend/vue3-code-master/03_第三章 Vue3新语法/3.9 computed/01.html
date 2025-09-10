@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>computed</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>测试只带get的计算属性</h3>
+      <p>数量: {{count}}</p>
+      <p>姓名: {{person.name}}</p>
+      <p>信息（get计算属性）: {{info}}</p>
+
+      <button @click="update">更新</button>
+
+      <h3>测试带get和set的计算属性</h3>
+      <input type="text" v-model="doubleCount" />
+    </div>
+    <script>
+      const { createApp, ref, reactive, computed } = Vue
+
+      createApp({
+        setup() {
+          // 定义ref对象
+          const count = ref(0)
+          // 定义reactive对象
+          const person = reactive({
+            name: '张三',
+          })
+
+          // 定义只有getter的计算属性
+          const info = computed(() => {
+            return `${person.name}完成的数量${count.value}`
+          })
+
+          // 定义有getter和setter的计算属性
+          const doubleCount = computed({
+            get() {
+              console.log(info)
+              return count.value * 2
+            },
+            set(value) {
+              count.value = value / 2
+            },
+          })
+
+          // 更新ref或reactive数据
+          const update = () => {
+            count.value += 1
+            person.name += '--'
+          }
+
+          return {
+            count,
+            person,
+            info,
+            update,
+            doubleCount,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

@@ -8,7 +8,6 @@ public class demo_线程 {
             }
         };
         thread1.start();
-
         // 创建线程的第二种方式：实现Runnable接口
         Thread thread2 = new Thread(new Runnable() {
             @Override

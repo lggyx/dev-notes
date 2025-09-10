@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p ref="pRef">{{message}}</p>
+        <button @click="message = '尚硅谷拥有优质的互联网技术培训'">更新内容</button>
+    </div>
+    <script>
+        const {
+            createApp
+        } = Vue
+
+        const app = createApp({
+            data() {
+                return {
+                    message: '欢迎来到尚硅谷',
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate', this.message, this.$refs.pRef)
+            },
+            created() {
+                console.log('created', this.message, this.$refs.pRef)
+            },
+            beforeMount() {
+                console.log('beforeMount', this.message, this.$refs.pRef)
+            },
+            mounted() {
+                console.log('mounted', this.message, this.$refs.pRef)
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate')
+                debugger;
+            },
+            updated() {
+                console.log('updated')
+            },
+            beforeUnmount() {
+                console.log('beforeUnmount', this.$refs.pRef)
+                // debugger;
+            },
+            unmounted() {
+                console.log('unmounted', this.$refs.pRef)
+            }
+        })
+
+        app.mount('#app');
+
+        setTimeout(() => {
+            app.unmount();
+        }, 5000);
+    </script>
+      </script>
+</body>
+</html>

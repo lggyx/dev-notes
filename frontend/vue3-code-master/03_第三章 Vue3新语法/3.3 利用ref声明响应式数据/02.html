@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>利用ref声明响应式数据</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 模板中不用.value, 内部在模板编译时会自动添加 -->
+      <p>person: {{person}}</p>
+      <button @click="setNewPerson">指定新的人</button>
+    </div>
+
+    <script>
+      const { createApp, ref } = Vue
+
+      createApp({
+        setup(props, context) {
+          // 创建ref对象, 并指定内部初始值为一个人对象
+          const person = ref({ name: 'Tom', age: 12 })
+
+          function setNewPerson() {
+            // 指定value为一个新的人对象
+            person.value = { name: 'Jack', age: 23 }
+          }
+
+          return {
+            person,
+            setNewPerson,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

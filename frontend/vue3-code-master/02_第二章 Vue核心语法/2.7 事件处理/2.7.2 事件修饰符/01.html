@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件修饰符</title>
+  </head>
+  <body>
+    <div id="app">
+      <a href="http://www.baidu.com" @click.prevent="test1">去百度</a>
+      <br />
+      <br />
+      <div
+        style="width: 200px; height: 200px; background: yellow"
+        @click="test2"
+      >
+        outer
+        <div
+          style="width: 100px; height: 100px; background: green"
+          @click.stop="test3"
+        >
+          inner
+        </div>
+      </div>
+      <br />
+      <button @click.once="test4">只响应一次点击</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            num: 2,
+          }
+        },
+
+        methods: {
+          test1() {
+            alert('响应点击链接')
+          },
+          test2() {
+            alert('点击outer')
+          },
+          test3() {
+            alert('点击inner')
+          },
+          test4() {
+            alert('响应点击')
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

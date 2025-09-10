@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>readonly与shallowReadonly</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h3>reactive对象显示</h3>
+      <p>person.name:{{person.name}}</p>
+      <p>person.addr.city:{{person.addr.city}}</p>
+
+      <h3>readonly对象显示</h3>
+      <p>rPerson.name:{{rPerson.name}}</p>
+      <p>rPerson.addr.city:{{rPerson.addr.city}}</p>
+
+      <h3>shallowReadonly对象显示</h3>
+      <p>srPerson.name:{{srPerson.name}}</p>
+      <p>srPerson.addr.city:{{srPerson.addr.city}}</p>
+
+      <button @click="update1">通过reactive对象更新</button>
+      <button @click="update2">通过readonly对象更新</button>
+      <button @click="update3">通过shallowReadonly对象更新</button>
+    </div>
+
+    <script>
+      const { createApp, reactive, readonly, shallowReadonly } = Vue
+
+      createApp({
+        setup() {
+          // 生成深度可读写的reactive对象
+          const person = reactive({
+            name: '张三',
+            addr: {
+              city: '北京',
+            },
+          })
+
+          // 生成深度只读的reactive对象
+          const rPerson = readonly(person)
+
+          // 生成浅只读的reactive对象
+          const srPerson = shallowReadonly(person)
+
+          const update1 = () => {
+            person.name += '--' // 控制台没警告提示, 界面会正常更新
+            person.addr.city += '++' // 控制台没警告提示, 界面会正常更新
+          }
+
+          const update2 = () => {
+            rPerson.name += '--' // 控制台警告提示, 且界面不会更新
+            rPerson.addr.city += '++' // 控制台警告提示, 且界面不会更新
+          }
+
+          const update3 = () => {
+            srPerson.name += '--' // 控制台警告提示, 且界面不会更新
+            srPerson.addr.city += '++' // 控制台没警告提示, 界面会正常更新
+          }
+          return {
+            person,
+            rPerson,
+            srPerson,
+            update1,
+            update2,
+            update3,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

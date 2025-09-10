@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>toRef</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.40/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li>msg: {{msg}}</li>
+        <li>person: {{person}}</li>
+        <li>courses: {{courses}}</li>
+      </ul>
+      <button @click="updateState">更新state</button>
+    </div>
+
+    <script>
+      const { createApp, reactive, toRef, toRefs } = Vue
+
+      createApp({
+        setup(props, context) {
+          const state = reactive({
+            msg: 'Hello Atguigu',
+            person: { name: 'Tom', age: 22 },
+            courses: ['JS', 'BOM', 'DOM'],
+          })
+
+          const updateState = () => {
+            state.msg += '--'
+            state.person = { name: 'Jack', age: 33 }
+            state.courses = ['JS2', 'BOM2', 'DOM2']
+          }
+          return {
+            msg: toRef(state, 'msg'),
+            person: toRef(state, 'person'),
+            courses: toRef(state, 'courses'),
+            updateState,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

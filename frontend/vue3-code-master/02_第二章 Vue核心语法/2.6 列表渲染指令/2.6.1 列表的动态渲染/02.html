@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列表的动态渲染</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>在template上使用v-for</h2>
+      <ul>
+        <template v-for="p in persons">
+          <li>{{p.name}}--{{p.age}}</li>
+          <span>来自尚硅谷学员</span>
+        </template>
+      </ul>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            persons: [
+              { id: '001', name: '张三', age: 22 },
+              { id: '002', name: '李四', age: 24 },
+              { id: '003', name: '王五', age: 23 },
+            ],
+            car: {
+              name: '奥迪A8',
+              price: '70万',
+              color: '黑色',
+            },
+            num: 5,
+          }
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绑定事件监听</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>num: {{num}}</h2>
+      <button @click="handlerClick1">测试event1(点击提示按钮的文本)</button>
+      <br /><br />
+      <button @click="event => handlerClick2('特定任意类型数据')">
+        测试event2(指定特定数据)
+      </button>
+      <br /><br />
+      <button @click="event => num += 3">测试event3(点击num增加3)</button>
+      <br /><br />
+      <button @click="event => handlerClick4('特定任意类型数据', event)">
+        测试event4(点击提示按钮的文本和自定义数据)
+      </button>
+      <br /><br />
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            num: 2,
+          }
+        },
+        methods: {
+          handlerClick1(event) {
+            alert(event.target.innerHTML)
+          },
+          handlerClick2(msg) {
+            alert(msg)
+          },
+          handlerClick4(msg, event) {
+            alert(msg + '--' + event.target.innerHTML)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

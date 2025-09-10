@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基本使用</title>
+  </head>
+  <body>
+    <div id="app">
+      标题:
+      <input
+        type="text"
+        placeholder="输入内容同步到标题"
+        v-model="title"
+      /><br />
+      问题: <span>{{ question }}</span>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            title: '',
+            question: '',
+          }
+        },
+
+        watch: {
+          title(newVal, oldVal) {
+            console.log(newVal, oldVal)
+            // 直接更新DOM
+            document.title = newVal
+            // 模拟请求异步获取对应的答案
+            setTimeout(() => {
+              const question = `${newVal}最匹配的问题?`
+              this.question = question
+            }, 1000)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

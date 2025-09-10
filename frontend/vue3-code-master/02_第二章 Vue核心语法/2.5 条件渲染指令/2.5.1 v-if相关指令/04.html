@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if相关指令</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>你的入学测试得分: {{score}}</h1>
+      <button @click="examAgin">学习后再复试一次</button>
+      <template v-if="score>=60">
+        <button>去找咨询老师办理入学</button>
+        <button>去找技术老师深入交流技术疑问</button>
+        <button>去找就业老师了解就业信息</button>
+      </template>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            score: 55,
+          }
+        },
+        methods: {
+          examAgin() {
+            this.score += 10
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算属性的setter</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>姓: <input type="text" v-model="firstName" /></p>
+      <p>名: <input type="text" v-model="lastName" /></p>
+      <p>
+        姓名: <input type="text" placeholder="格式: 姓-名" v-model="fullName" />
+      </p>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+      const { createApp } = Vue
+
+      createApp({
+        data() {
+          return {
+            title: '',
+            question: '',
+          }
+        },
+
+        watch: {
+          title(newVal, oldVal) {
+            console.log(newVal, oldVal)
+            // 直接更新DOM
+            document.title = newVal
+            // 模拟请求异步获取对应的答案
+            setTimeout(() => {
+              const question = `${newVal}最匹配的问题?`
+              this.question = question
+            }, 1000)
+          },
+        },
+      }).mount('#app')
+    </script>
+  </body>
+</html>
